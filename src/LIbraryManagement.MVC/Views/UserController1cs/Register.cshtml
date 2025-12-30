@@ -1,0 +1,43 @@
+﻿@model LIbraryManagement.MVC.Models.RegisterVM
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="container mt-4">
+
+    <form asp-action="Register" method="post" class="row g-3">
+
+
+        <div class="row mb-2">
+            <div class="col-4">
+                <label asp-for="FullName">نام کامل</label>
+                <input type="text" placeholder="محمد عزیزی" asp-for=" FullName" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label asp-for="UserName">نام کاربری</label>
+                <input type="text" placeholder="mohammad_aziz" asp-for=" UserName" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label asp-for="PhoneNumber">شماره تماس</label>
+                <input type="text" placeholder="0918" asp-for=" PhoneNumber" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-6">
+                <label asp-for="Email" class="ms-2">رایانامه</label>
+                <input type="email" placeholder="example@ymail.com" asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="col-6">
+                <label asp-for="Password" class="">رمز عبور</label>
+                <input type="password" placeholder="example@ymail.com" asp-for="Password" class="form-control" />
+            </div>
+
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">ثبت اطلاعات</button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,11 @@
+﻿using LibrarySys.Application.DTOs;
+
+namespace LibrarySys.Application.Contract.Identity
+{
+    public interface IAuthService
+    {
+        Task<BaseResponseDto<string>> Register(RegistrationRequestDto registrationRequest);
+        Task<BaseResponseDto<string>> Login(LoginDto login);
+        Task<bool> UserExist(string Email);
+    }
+}
