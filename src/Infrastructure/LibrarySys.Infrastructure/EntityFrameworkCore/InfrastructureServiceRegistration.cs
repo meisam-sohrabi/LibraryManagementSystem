@@ -1,5 +1,5 @@
 ﻿using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.BookAuthor;
+using LibrarySys.Application.Contract.BookAuthorService;
 using LibrarySys.Application.Contract.Infrastructure;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Repository;
@@ -13,14 +13,14 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
     public static class InfrastructureServiceRegistration
     {
         public static IServiceCollection InfrastructureConfiguration(this IServiceCollection services
-            ,IConfiguration configuration)
+            , IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(opt=>
+            services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseSqlServer(configuration["ConnectionStrings:LibraryManagementConnection"]);
             });
 
-            services.AddScoped(typeof(IGenericRepositry<>),typeof(GenericRepository<>));
+            services.AddScoped(typeof(IGenericRepositry<>), typeof(GenericRepository<>));
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBorrowingRepository, BorrowingRepository>();

@@ -16,7 +16,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
 
         public async Task<List<Author>> GetAuthorByName(List<string> Names)
         {
-            return await _context.Author.Where(c=> Names.Contains(c.Name)).ToListAsync();
+            return await _context.Author.AsNoTracking().Where(c=> Names.Contains(c.Name)).ToListAsync();
         }
     }
 }

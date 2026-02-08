@@ -1,8 +1,9 @@
 ﻿using LibrarySys.Application.DTOs;
-using LibrarySys.Application.Features.Handlers.Books.Request.Command;
-using LibrarySys.Application.Features.Handlers.Books.Request.Query;
-using LibrarySys.Domain.Entity;
+using LibrarySys.Application.Features.Books.Request.Command;
+using LibrarySys.Application.Features.Books.Request.Query;
+using LibrarySysApi.Attributes;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySysApi.Controllers
@@ -25,6 +26,8 @@ namespace LibrarySysApi.Controllers
         }
 
         [HttpGet("GetAll")]
+        [Permission()]
+        //[Authorize()]
         public async Task<BaseResponseDto<IReadOnlyList<GetBookResponseDto>>> GetAll()
         {
             return await _mediator.Send(new GetAllBookSpQuery());

@@ -11,13 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Handlers\Members\Handler\Query\" />
-    <Folder Include="Features\Handlers\Members\Request\Query\" />
+    <Folder Include="Features\Members\Handler\Query\" />
+    <Folder Include="Features\Members\Request\Query\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
-    <PackageReference Include="MediatR" Version="14.0.0" />
+	  <PackageReference Include="MediatR" Version="14.0.0" />
   </ItemGroup>
 
 </Project>

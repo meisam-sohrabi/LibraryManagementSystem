@@ -16,7 +16,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
 
         public async Task<bool> Exist(string Title,string Genre)
         {
-            return await _context.Book.Where(c => c.Title.Contains(Title) || c.Genere.Contains(Genre)).AnyAsync();
+            return await _context.Book.Where(c => c.Title == Title && c.Genere == Genre).AnyAsync();
         }
 
         

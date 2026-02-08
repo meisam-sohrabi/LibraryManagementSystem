@@ -13,6 +13,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Context
         public DbSet<Author> Author { get; set; }
         public DbSet<Member> Member { get; set; }
         public DbSet<BookAuthor> BookAuthor { get; set; }
+        public DbSet<Borrowing> Borrowing { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

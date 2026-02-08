@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Identity;
+﻿using LibrarySys.Application.Contract.IdentityService;
 using LibrarySys.Application.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Identity;
+using LibrarySys.Application.Contract.IdentityService;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Option;
 using LibrarySys.Identity.Entity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -49,16 +50,9 @@ namespace LibrarySys.Identity.Service
                 output.ValidationErrors = validation.ToDictionary();
                 return output;
             }
-            var userExist = await _userManager.Users.FirstOrDefaultAsync(c => c.UserName == login.Username);
-            if (userExist == null)
-            {
-                output.Message = "نام کاربری یا رمز عبور اشتباه است";
-                output.StatusCode = HttpStatusCode.BadRequest;
-                output.Success = false;
-                return output;
-            }
-            var checkPass = await _userManager.CheckPasswordAsync(userExist, login.Password);
-            if (!checkPass)
+
+            var userExist = await _userManager.Users.Where(c => c.UserName == login.Username).AsNoTracking().FirstOrDefaultAsync();
+            if (userExist == null || !(await _userManager.CheckPasswordAsync(userExist, login.Password)))
             {
                 output.Message = "نام کاربری یا رمز عبور اشتباه است";
                 output.StatusCode = HttpStatusCode.BadRequest;
@@ -153,7 +147,8 @@ namespace LibrarySys.Identity.Service
             var claims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier,user.Id),
-                new(ClaimTypes.Name,user.FullName)
+                new(ClaimTypes.Name,user.FullName),
+                new(ClaimTypes.Email,user.Email),
             };
             if (userRoles != null)
             {
@@ -166,7 +161,6 @@ namespace LibrarySys.Identity.Service
             issuer: _jwtConfiguration.Value.Issuer,
             audience: _jwtConfiguration.Value.Audience,
             claims: claims,
-            notBefore: DateTime.UtcNow,
             expires: DateTime.UtcNow.AddMinutes(60),
             signingCredentials: signingKey);
             var token = new JwtSecurityTokenHandler().WriteToken(jwtConfig);

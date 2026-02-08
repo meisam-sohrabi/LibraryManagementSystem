@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using LibrarySys.Application.Contract.BookAuthor;
+using LibrarySys.Application.Contract.BookAuthorService;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Domain.Entity;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;

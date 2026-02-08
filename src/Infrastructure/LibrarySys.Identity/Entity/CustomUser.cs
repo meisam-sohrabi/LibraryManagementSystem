@@ -5,6 +5,6 @@ namespace LibrarySys.Identity.Entity
     public class CustomUser : IdentityUser
     {
         public string FullName { get; set; }
-       
+
     }
 }

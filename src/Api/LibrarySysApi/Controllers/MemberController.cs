@@ -1,5 +1,5 @@
 ﻿using LibrarySys.Application.DTOs;
-using LibrarySys.Application.Features.Handlers.Members.Request.Command;
+using LibrarySys.Application.Features.Members.Request.Command;
 using LibrarySys.Domain.Entity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

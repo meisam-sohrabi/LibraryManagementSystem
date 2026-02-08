@@ -3,8 +3,8 @@ using LibraryManagement.Test.Mock;
 using LibrarySys.Application.Contract;
 using LibrarySys.Application.Contract.Infrastructure;
 using LibrarySys.Application.DTOs;
-using LibrarySys.Application.Features.Handlers.Books.Handler.Command;
-using LibrarySys.Application.Features.Handlers.Books.Request.Command;
+using LibrarySys.Application.Features.Books.Handler.Command;
+using LibrarySys.Application.Features.Books.Request.Command;
 using Moq;
 using Shouldly;
 

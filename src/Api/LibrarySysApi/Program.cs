@@ -37,10 +37,7 @@ builder.Services.AddSwaggerGen(c =>
             {
                 Type = ReferenceType.SecurityScheme,
                 Id = "Bearer"
-            },
-            Scheme = "oauth2",
-            Name = "Bearer",
-            In = ParameterLocation.Header
+            }
         },
         new List<string>()
         }
@@ -53,7 +50,10 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-
+builder.Services.AddMiniProfiler(option =>
+{
+    option.RouteBasePath = "/profiler";
+}).AddEntityFramework();    
 
 
 
@@ -69,8 +69,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiniProfiler();
 app.MapControllers();
 
 app.Run();

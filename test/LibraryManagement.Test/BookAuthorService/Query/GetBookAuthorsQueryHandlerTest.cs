@@ -1,8 +1,8 @@
 ﻿using LibraryManagement.Test.Mock;
-using LibrarySys.Application.Contract.BookAuthor;
+using LibrarySys.Application.Contract.BookAuthorService;
 using LibrarySys.Application.DTOs;
-using LibrarySys.Application.Features.Handlers.Books.Handler.Query;
-using LibrarySys.Application.Features.Handlers.Books.Request.Query;
+using LibrarySys.Application.Features.Books.Handler.Query;
+using LibrarySys.Application.Features.Books.Request.Query;
 using Moq;
 using Shouldly;
 
@@ -21,7 +21,7 @@ namespace LibraryManagement.Test.BookAuthorService.Query
         public async Task BookAuthor_Get_ShouldReturn_Book()
         {
             var handler = new GetBookQueryHandler(_mock.Object);
-            var result = await handler.Handle(new GetBookQuery(Guid.NewGuid()),CancellationToken.None);
+            var result = await handler.Handle(new GetBookQuery(Guid.NewGuid()), CancellationToken.None);
 
             result.ShouldBeOfType<BaseResponseDto<BookAuthorRequestDto>>();
         }

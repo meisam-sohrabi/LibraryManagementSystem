@@ -10,6 +10,5 @@ namespace LibrarySys.Identity.Context
         {
         }
 
-
     }
 }
