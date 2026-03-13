@@ -37,9 +37,9 @@ namespace LibraryManagement.Test.BookAuthorService.Command
                 Genere = "روانشانی",
                 AvailableCopies = 12,
                 PublishYear = 1370,
-                Authors = new List<AuthorRequestDto>
+                Authors = new List<AuthorRequestAppDto>
                 {
-                    new AuthorRequestDto
+                    new AuthorRequestAppDto
                     {
                         Name = "محمود دولت آبادی",
                         BirthYear = 1365

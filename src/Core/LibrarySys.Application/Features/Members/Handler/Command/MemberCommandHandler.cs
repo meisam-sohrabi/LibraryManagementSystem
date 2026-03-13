@@ -40,6 +40,14 @@ namespace LibrarySys.Application.Features.Members.Handler.Command
                 output.Success = true;
                 return output;
             }
+            var memberRegistered = await _memberRepository.GetMember(Email: request.Email);
+            if(memberRegistered != null)
+            {
+                output.Message = "شما قبلا عضو شده اید";
+                output.StatusCode = HttpStatusCode.Conflict;
+                output.Success = true;
+                return output;
+            }
             var member = new Member
             {
                 Email = request.Email,

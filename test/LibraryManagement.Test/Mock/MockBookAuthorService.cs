@@ -15,9 +15,9 @@ namespace LibraryManagement.Test.Mock
                 Genere = "Fiction",
                 PublishYear = 1925,
                 AvailableCopies = 5,
-                Authors = new List<AuthorRequestDto>
+                Authors = new List<AuthorRequestAppDto>
                 {
-                    new AuthorRequestDto
+                    new AuthorRequestAppDto
                     {
                         Name = "F. Scott Fitzgerald",
                         BirthYear = 1896

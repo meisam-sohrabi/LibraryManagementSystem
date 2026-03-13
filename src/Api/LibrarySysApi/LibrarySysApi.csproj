@@ -26,4 +26,8 @@
     <ProjectReference Include="..\..\Infrastructure\LibrarySys.Infrastructure\LibrarySys.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

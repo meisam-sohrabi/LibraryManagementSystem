@@ -1,5 +1,6 @@
 ﻿using LibrarySys.Application.Contract;
 using LibrarySys.Application.Contract.BookAuthorService;
+using LibrarySys.Application.Contract.FileService;
 using LibrarySys.Application.Contract.Infrastructure;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Repository;
@@ -26,6 +27,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
             services.AddScoped<IBorrowingRepository, BorrowingRepository>();
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IBookAuthorService, BookAuthorService>();
+            services.AddScoped<IFileStorageService,LocalFileStorageService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }

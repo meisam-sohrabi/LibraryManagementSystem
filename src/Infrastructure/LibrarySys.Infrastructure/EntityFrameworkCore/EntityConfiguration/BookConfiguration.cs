@@ -13,6 +13,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.EntityConfiguration
             builder.ToTable("Books", "book");
             builder.Property(c=> c.Title).HasMaxLength(250).IsRequired(required:true);
             builder.Property(c => c.Genere).HasMaxLength(70).IsRequired(required:true);
+            builder.Property(c => c.ImageUrl).IsRequired(required: false);
         }
     }
 }

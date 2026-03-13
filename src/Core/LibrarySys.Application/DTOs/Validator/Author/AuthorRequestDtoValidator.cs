@@ -2,7 +2,7 @@
 
 namespace LibrarySys.Application.DTOs.Validator.Author
 {
-    public class AuthorRequestDtoValidator : AbstractValidator<AuthorRequestDto>
+    public class AuthorRequestDtoValidator : AbstractValidator<AuthorRequestAppDto>
     {
         public AuthorRequestDtoValidator()
         {

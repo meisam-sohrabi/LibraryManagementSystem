@@ -15,6 +15,7 @@ builder.Services.ApplicationConfiguration();
 builder.Services.InfrastructureConfiguration(builder.Configuration);
 builder.Services.IdentityConfiguration(builder.Configuration);
 builder.Services.Configure<JwtOption>(builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<FileStoragePathOption>(builder.Configuration.GetSection("FileStorage"));
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -53,7 +54,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddMiniProfiler(option =>
 {
     option.RouteBasePath = "/profiler";
-}).AddEntityFramework();    
+}).AddEntityFramework();
 
 
 

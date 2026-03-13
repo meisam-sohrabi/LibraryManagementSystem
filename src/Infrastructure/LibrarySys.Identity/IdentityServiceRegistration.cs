@@ -32,10 +32,7 @@ namespace LibrarySys.Identity
                 {
                     o.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidAlgorithms = new[]
-                                {
-                                    SecurityAlgorithms.HmacSha256
-                                },
+                        ValidAlgorithms = new [] { SecurityAlgorithms.HmacSha256},
                         RequireSignedTokens = true,
                         ValidateIssuerSigningKey = true,
                         ValidateIssuer = true,

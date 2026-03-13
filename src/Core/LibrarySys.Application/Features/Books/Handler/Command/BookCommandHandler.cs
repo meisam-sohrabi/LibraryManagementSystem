@@ -40,7 +40,7 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
                 return output;
             }
 
-            var bookExist = await _bookRepository.Exist(request.BookAuthorRequest.Title, request.BookAuthorRequest.Genere);
+            var bookExist = await _bookRepository.ExistByTitleAndGenre(request.BookAuthorRequest.Title, request.BookAuthorRequest.Genere);
             if (bookExist)
             {
                 output.Message = "کتاب از قبل ایجاد شده است";
@@ -56,7 +56,7 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
                     Title = request.BookAuthorRequest.Title,
                     PublishYear = request.BookAuthorRequest.PublishYear,
                     AvailableCopies = request.BookAuthorRequest.AvailableCopies,
-                    Genere = request.BookAuthorRequest.Genere
+                    Genere = request.BookAuthorRequest.Genere,
                 };
 
                 var authorsName = request.BookAuthorRequest.Authors.Select(auth => auth.Name).ToList();
@@ -87,7 +87,7 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
                     Genere = book.Genere,
                     AvailableCopies = book.AvailableCopies,
                     PublishYear = book.PublishYear,
-                    Authors = book.Authors.Select(c => new AuthorRequestDto { Name = c.Author.Name, BirthYear = c.Author.BirthYear }).ToList()
+                    Authors = book.Authors.Select(c => new AuthorRequestAppDto { Name = c.Author.Name, BirthYear = c.Author.BirthYear }).ToList()
                 };
                 return output;
             }

@@ -39,7 +39,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Service
                               Title = book.Title,
                               Genere = book.Genere,
                               AvailableCopies = book.AvailableCopies,
-                              Authors = book.Authors.Select(c => new AuthorRequestDto
+                              Authors = book.Authors.Select(c => new AuthorRequestAppDto
                               {
                                   Name = c.Author.Name,
                                   BirthYear = c.Author.BirthYear

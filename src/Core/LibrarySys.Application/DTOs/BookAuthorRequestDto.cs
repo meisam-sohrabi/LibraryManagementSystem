@@ -6,11 +6,10 @@
         public string Genere { get; set; }
         public int PublishYear { get; set; }
         public int AvailableCopies { get; set; }
-
-        public ICollection<AuthorRequestDto> Authors { get; set; } = new List<AuthorRequestDto>();
+        public ICollection<AuthorRequestAppDto> Authors { get; set; } = new List<AuthorRequestAppDto>();
     }
 
-    public class AuthorRequestDto
+    public class AuthorRequestAppDto
     {
         public string Name { get; set; }
         public int BirthYear { get; set; }

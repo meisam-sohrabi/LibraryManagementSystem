@@ -14,7 +14,12 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
             _context = context;
         }
 
-        public async Task<bool> Exist(string Title,string Genre)
+        public async Task<bool> ExistById(Guid Id)
+        {
+            return await _context.Book.AnyAsync(c => c.Id == Id);
+        }
+
+        public async Task<bool> ExistByTitleAndGenre(string Title,string Genre)
         {
             return await _context.Book.Where(c => c.Title == Title && c.Genere == Genre).AnyAsync();
         }
