@@ -15,7 +15,6 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
         private readonly IAuthorRepository _authorRepository;
         private readonly IUnitOfWork _uow;
         private readonly IValidator<BookAuthorRequestDto> _validator;
-
         public BookCommandHandler(IBookRepository bookRepository
             , IAuthorRepository authorRepository
             , IUnitOfWork uow

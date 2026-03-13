@@ -7,6 +7,7 @@ using LibrarySysApi.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace LibrarySysApi.Controllers
 {
@@ -16,37 +17,16 @@ namespace LibrarySysApi.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IFileStorageService _fileStorageService;
-
-        public BookController(IMediator mediator, IFileStorageService fileStorageService)
+        private readonly IMemoryCache _cashe;
+        public BookController(IMediator mediator, IFileStorageService fileStorageService,IMemoryCache cashe)
         {
             _mediator = mediator;
             _fileStorageService = fileStorageService;
+            _cashe = cashe;
         }
         [HttpPost("Add")]
         public async Task<BaseResponseDto<BookAuthorRequestDto>> CreateBook([FromBody] BookAuthorRequestDto bookAuthorRequest)
         {
-
-            //string? bookUrl = null;
-            //if(bookAuthorRequest.BookImageFile != null)
-            //{
-            //    using var stream = bookAuthorRequest.BookImageFile.OpenReadStream();
-            //    bookUrl =  await _fileStorageService.SaveBookImageAsync(stream, bookAuthorRequest.BookImageFile.FileName);
-            //}
-
-            //BookAuthorRequestAppDto bookAuth = new BookAuthorRequestAppDto
-            //{
-            //    Title = bookAuthorRequest.Title,
-            //    Genere = bookAuthorRequest.Genere,
-            //    AvailableCopies = bookAuthorRequest.AvailableCopies,
-            //    PublishYear = bookAuthorRequest.PublishYear,
-            //    BookImageUrl = bookUrl ?? "There is no image uploaded.",
-            //    Authors = bookAuthorRequest.Authors.Select(c => new AuthorRequestAppDto
-            //    {
-            //        Name = c.Name,
-            //        BirthYear = c.BirthYear,
-            //    }).ToList()
-            // };
-
             var command = new BookCommand { BookAuthorRequest = bookAuthorRequest };
             return await _mediator.Send(command);
         }
@@ -65,19 +45,25 @@ namespace LibrarySysApi.Controllers
             return await _mediator.Send(command);
         }
 
-
-
-
         [HttpGet("GetAll")]
         [Permission()]
         //[Authorize()]
         public async Task<BaseResponseDto<IReadOnlyList<GetBookResponseDto>>> GetAll()
         {
-            return await _mediator.Send(new GetAllBookSpQuery());
+            string casheKey = "Books-Key";
+            if(!_cashe.TryGetValue(casheKey, out BaseResponseDto<IReadOnlyList<GetBookResponseDto>> response))
+            {
+                response = await _mediator.Send(new GetAllBookSpQuery());
+                if(response != null)
+                {
+                    _cashe.Set(casheKey, response, TimeSpan.FromMinutes(2));
+                }
+            }
+            return response ?? new BaseResponseDto<IReadOnlyList<GetBookResponseDto>>();
         }
 
         [HttpGet("Get")]
-        public async Task<BaseResponseDto<LibrarySys.Application.DTOs.BookAuthorRequestDto>> Get(Guid Id)
+        public async Task<BaseResponseDto<BookAuthorRequestDto>> Get(Guid Id)
         {
             var query = new GetBookQuery(Id);
             return await _mediator.Send(query);
