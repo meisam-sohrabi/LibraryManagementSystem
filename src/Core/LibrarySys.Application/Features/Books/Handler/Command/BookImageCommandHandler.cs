@@ -1,4 +1,5 @@
-﻿using LibrarySys.Application.Contract.Infrastructure;
+﻿using LibrarySys.Application.Contract;
+using LibrarySys.Application.Contract.Infrastructure;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Books.Request.Command;
 using LibrarySys.Domain.Entity;
@@ -10,10 +11,12 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
     public class BookImageCommandHandler : IRequestHandler<BookImageCommand, BaseResponseDto<string>>
     {
         private readonly IBookRepository _bookRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BookImageCommandHandler(IBookRepository bookRepository)
+        public BookImageCommandHandler(IBookRepository bookRepository,IUnitOfWork unitOfWork)
         {
             _bookRepository = bookRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<BaseResponseDto<string>> Handle(BookImageCommand request, CancellationToken cancellationToken)
         {
@@ -28,6 +31,8 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
                 return outPut;
             }
             bookExist.ImageUrl = request.ImageUrl;
+            _bookRepository.Update(bookExist);
+            await _unitOfWork.SaveChangesAsync();
             outPut.Message = $"تصویر مورد نظر برای کتاب {bookExist.Title} ثبت شد";
             outPut.StatusCode = HttpStatusCode.OK;
             outPut.Success = true;

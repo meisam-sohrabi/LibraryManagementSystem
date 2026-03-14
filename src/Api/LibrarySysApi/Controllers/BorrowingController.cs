@@ -26,6 +26,17 @@ namespace LibrarySysApi.Controllers
             return await _mediator.Send(command);
         }
 
+
+        [HttpPost("ReturnBorrow")]
+        [Authorize()]
+        public async Task<BaseResponseDto<string>> ReturnBorrow(DateTime ReturnDate,Guid ReturnCode)
+        { 
+            var command = new ReturnBorrowCommand(ReturnDate, ReturnCode);
+            return await _mediator.Send(command);
+        }
+
+
+
         [HttpGet("download-my-history")]
         [Authorize(Roles = "User")]
         public async Task<IActionResult> DownloadBackup(string Email)

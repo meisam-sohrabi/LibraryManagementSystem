@@ -14,10 +14,15 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
             _context = context;
         }
 
-        public async Task<List<Borrowing>> GetByMemberIdAsync(Guid memberId)
+        public async Task<List<Borrowing>> GetAllByMemberIdAsync(Guid memberId)
         {
             return await _context.Borrowing.Include(c=> c.Book)
                 .Where(c => c.MemberId == memberId).ToListAsync();
+        }
+
+        public async Task<Borrowing> GetByReturnCode(Guid returnCode)
+        {
+            return await _context.Borrowing.FirstOrDefaultAsync(c => c.ReturnCode == returnCode);
         }
 
         public async Task<bool> isBorrowedAsync(Guid bookId)

@@ -5,6 +5,7 @@ namespace LibrarySys.Application.Contract.Infrastructure
     public interface IBorrowingRepository : IGenericRepositry<Borrowing>
     {
         Task<bool> isBorrowedAsync(Guid bookId);
-        Task<List<Borrowing>> GetByMemberIdAsync(Guid memberId);
+        Task<List<Borrowing>> GetAllByMemberIdAsync(Guid memberId);
+        Task<Borrowing> GetByReturnCode(Guid returnCode);
     }
 }

@@ -28,7 +28,7 @@ namespace LibrarySys.Application.Features.Borrowings.Handler.Query
                 output.StatusCode = HttpStatusCode.NotFound;
                 return output;
             }
-            var backupData = await _borrowingRepository.GetByMemberIdAsync(memberExist.Id);
+            var backupData = await _borrowingRepository.GetAllByMemberIdAsync(memberExist.Id);
             var backupDto = backupData.Select(c => new BorrowingBackUpDto
             {
                 Meta = new BackUpMeta
