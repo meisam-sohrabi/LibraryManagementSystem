@@ -29,9 +29,9 @@ namespace LibrarySysApi.Controllers
 
         [HttpPost("ReturnBorrow")]
         [Authorize()]
-        public async Task<BaseResponseDto<string>> ReturnBorrow(DateTime ReturnDate,Guid ReturnCode)
+        public async Task<BaseResponseDto<string>> ReturnBorrow(ReturnBorrowRequestDto returnBorrow)
         { 
-            var command = new ReturnBorrowCommand(ReturnDate, ReturnCode);
+            var command = new ReturnBorrowCommand { ReturnBorrow = returnBorrow };
             return await _mediator.Send(command);
         }
 

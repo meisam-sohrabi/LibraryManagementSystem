@@ -6,6 +6,7 @@ namespace LibrarySys.Application.Contract.Infrastructure
     {
         Task<bool> isBorrowedAsync(Guid bookId);
         Task<List<Borrowing>> GetAllByMemberIdAsync(Guid memberId);
-        Task<Borrowing> GetByReturnCode(Guid returnCode);
+        Task<Borrowing> GetByReturnCodeAsync(Guid returnCode);
+        Task<bool> ReturnCodeExist(Guid returnCode);
     }
 }

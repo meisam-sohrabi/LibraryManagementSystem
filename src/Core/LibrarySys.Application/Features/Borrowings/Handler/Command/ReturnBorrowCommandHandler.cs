@@ -1,4 +1,5 @@
-﻿using LibrarySys.Application.Contract;
+﻿using FluentValidation;
+using LibrarySys.Application.Contract;
 using LibrarySys.Application.Contract.Infrastructure;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Borrowings.Request.Command;
@@ -12,19 +13,32 @@ namespace LibrarySys.Application.Features.Borrowings.Handler.Command
     {
         private readonly IBorrowingRepository _borrowingRepo;
         private readonly IUnitOfWork _uow;
+        private readonly IValidator<ReturnBorrowRequestDto> _validator;
 
-        public ReturnBorrowCommandHandler(IBorrowingRepository borrowingRepo, IUnitOfWork uow)
+        public ReturnBorrowCommandHandler(IBorrowingRepository borrowingRepo, IUnitOfWork uow
+            , IValidator<ReturnBorrowRequestDto> validator)
         {
             _borrowingRepo = borrowingRepo;
             _uow = uow;
+            _validator = validator;
         }
         public async Task<BaseResponseDto<string>> Handle(ReturnBorrowCommand request, CancellationToken cancellationToken)
         {
             BaseResponseDto<string> outPut = new BaseResponseDto<string>();
-            Borrowing borrowed = await _borrowingRepo.GetByReturnCode(request.returnCode);
+
+            var validation = await _validator.ValidateAsync(request.ReturnBorrow);
+            if (!validation.IsValid)
+            {
+                outPut.Message = "خطاهای اعتبارسنجی رخ داده است.";
+                outPut.Success = false;
+                outPut.StatusCode = HttpStatusCode.BadRequest;
+                outPut.ValidationErrors = validation.ToDictionary();
+                return outPut;
+            }
+            Borrowing borrowed = await _borrowingRepo.GetByReturnCodeAsync(request.ReturnBorrow.ReturnCode);
             if (borrowed != null)
             {
-                borrowed.ReturnDate = request.returnDate;
+                borrowed.ReturnDate = request.ReturnBorrow.ReturnDate;
                 calculateAndSetFee(borrowed);
                 await _uow.SaveChangesAsync();
 

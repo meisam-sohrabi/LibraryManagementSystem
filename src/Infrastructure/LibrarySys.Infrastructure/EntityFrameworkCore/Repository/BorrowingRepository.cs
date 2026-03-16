@@ -20,7 +20,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
                 .Where(c => c.MemberId == memberId).ToListAsync();
         }
 
-        public async Task<Borrowing> GetByReturnCode(Guid returnCode)
+        public async Task<Borrowing> GetByReturnCodeAsync(Guid returnCode)
         {
             return await _context.Borrowing.FirstOrDefaultAsync(c => c.ReturnCode == returnCode);
         }
@@ -28,6 +28,11 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
         public async Task<bool> isBorrowedAsync(Guid bookId)
         {
             return await _context.Borrowing.AnyAsync(c=> c.BookId == bookId && c.ReturnDate == null);
+        }
+
+        public async Task<bool> ReturnCodeExist(Guid returnCode)
+        {
+           return await _context.Borrowing.AnyAsync(c=> c.ReturnCode == returnCode);
         }
     }
 }
