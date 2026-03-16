@@ -4,6 +4,7 @@ using LibrarySys.Application.Contract.IdentityService;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Option;
 using LibrarySys.Identity.Entity;
+using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 namespace LibrarySys.Identity.Service
 {
     public class AuthService : IAuthService
@@ -23,13 +25,15 @@ namespace LibrarySys.Identity.Service
         private readonly IOptions<JwtOption> _jwtConfiguration;
         private readonly IValidator<LoginDto> _loginValidator;
         private readonly IValidator<RegistrationRequestDto> _registrationValidator;
+        private readonly HttpClient _client;
 
         public AuthService(UserManager<CustomUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IUnitOfWork unitOfWork,
             IOptions<JwtOption> jwtConfiguration,
             IValidator<LoginDto> loginValidator,
-            IValidator<RegistrationRequestDto> registrationValidator)
+            IValidator<RegistrationRequestDto> registrationValidator,
+            HttpClient client)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -37,6 +41,7 @@ namespace LibrarySys.Identity.Service
             _jwtConfiguration = jwtConfiguration;
             _loginValidator = loginValidator;
             _registrationValidator = registrationValidator;
+            _client = client;
         }
         public async Task<BaseResponseDto<string>> Login(LoginDto login)
         {
@@ -68,6 +73,97 @@ namespace LibrarySys.Identity.Service
             return output;
         }
 
+
+         // this is sms for test sandbox works well.
+        public async Task<BaseResponseDto<OTPResponseDto>> OneTimePasswordGenerator(string phoneNumber)
+        {
+            BaseResponseDto<OTPResponseDto> outPut = new BaseResponseDto<OTPResponseDto>();
+            OTPRequestDto sendSMS = new OTPRequestDto
+            {
+                mobile = phoneNumber,
+                templateId = 123456,
+                parameters = new OTPParameter[]
+                {
+                    new OTPParameter
+                    {
+                        name = "CODE",
+                        value = "12345"
+
+                    }
+                }
+            };
+
+            string apiKey = "RFTjnPsWSklNjGxinGA5A0fxC72sqU1hZwHbG6CqDHN1K4Ds";
+            
+            try
+            {
+
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://api.sms.ir/v1/send/verify");
+                _client.DefaultRequestHeaders.Add("X-API-KEY", apiKey);
+                string content = JsonSerializer.Serialize(sendSMS);
+                request.Content = new StringContent(content, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.SendAsync(request);
+
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.OK:
+                        string data = await response.Content.ReadAsStringAsync();
+                        OTPResponseDto deserialize = JsonSerializer.Deserialize<OTPResponseDto>(data);
+                        outPut.Message = "عملیات موفق آمیز بود";
+                        outPut.StatusCode = HttpStatusCode.OK;
+                        outPut.Success = true;
+                        outPut.Data = deserialize;
+                        break;
+                    case HttpStatusCode.BadRequest:
+                        outPut.Message = "وقوع خطای منطقی";
+                        outPut.StatusCode = HttpStatusCode.BadRequest;
+                        outPut.Success = false;
+                        break;
+                    case HttpStatusCode.Unauthorized:
+                        outPut.Message = "وجود خطا در فرآیند احراز هویت";
+                        outPut.StatusCode = HttpStatusCode.Unauthorized;
+                        outPut.Success = false;
+                        break;
+                    case HttpStatusCode.TooManyRequests:
+                        outPut.Message = "تعداد درخواست غیر مجاز";
+                        outPut.StatusCode = HttpStatusCode.TooManyRequests;
+                        outPut.Success = false;
+                        break;
+                    case HttpStatusCode.InternalServerError:
+                        outPut.Message = "خطای غیر منتظره";
+                        outPut.StatusCode = HttpStatusCode.InternalServerError;
+                        outPut.Success = false;
+                        break;
+                    default:
+                        break; 
+                }
+                return outPut;
+
+            }
+            catch(HttpRequestException http)
+            {
+                outPut.Message = $"خطای سرور: {http.Message}";
+                outPut.Success = false;
+                outPut.StatusCode = HttpStatusCode.InternalServerError;
+                return outPut;
+            }
+            catch(TimeoutException timeout)
+            {
+                outPut.Message = $"ارسال درخواست با خطا مواجه شد {timeout.Message}لطفا دقایقی دیگر امتحان کنید";
+                outPut.StatusCode = HttpStatusCode.RequestTimeout;
+                outPut.Success = false;
+                return outPut;
+            }
+            catch (Exception e)
+            {
+                outPut.Message = $"خطای سیستمی رخ داده است{e.Message}";
+                outPut.StatusCode = HttpStatusCode.InternalServerError;
+                outPut.Success = false;
+                return outPut;
+            }
+
+
+        }
         public async Task<BaseResponseDto<string>> Register(RegistrationRequestDto registrationRequest)
         {
             var output = new BaseResponseDto<string>();

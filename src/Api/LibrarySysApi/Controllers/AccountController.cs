@@ -22,6 +22,12 @@ namespace LibrarySysApi.Controllers
            return await _authService.Register(registrationRequest);   
         }
 
+        [HttpPost("OTP")]
+        public async Task<BaseResponseDto<OTPResponseDto>> OneTimePasswordGenerator(string phoneNumber)
+        {
+            return await _authService.OneTimePasswordGenerator(phoneNumber);
+        }
+
         [HttpPost("Login")]
         public async Task<BaseResponseDto<string>> Login([FromBody]LoginDto loginRequest)
         {
