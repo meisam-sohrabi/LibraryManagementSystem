@@ -16,6 +16,19 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Service
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<BookAuthorFullSearchFilterResponseDto>> FullSearch(BookAuthorFullSearchRequestDto search)
+        {
+            string spName = "SearchFilter";
+            using var connection = _context.Database.GetDbConnection();
+            if(connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            var rows = await connection.QueryAsync<BookAuthorFullSearchFilterResponseDto>(spName,search,commandType:CommandType.StoredProcedure);
+            return rows;
+        }
+
         public async Task<IReadOnlyList<GetBookResponseDto>> GetBookAuthor()
         {
             var spName = "GetBookAuthor";
@@ -27,6 +40,11 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Service
             var rows = await connection.QueryAsync<GetBookResponseDto>(spName);
             return rows.ToList();
         }
+
+
+
+
+
 
         public async Task<BookAuthorRequestDto> GetByIdWithAuthor(Guid Id)
         {

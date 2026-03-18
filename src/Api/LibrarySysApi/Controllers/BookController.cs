@@ -63,10 +63,19 @@ namespace LibrarySysApi.Controllers
         }
 
         [HttpGet("Get")]
+        [Authorize()]
         public async Task<BaseResponseDto<BookAuthorRequestDto>> Get(Guid Id)
         {
             var query = new GetBookQuery(Id);
             return await _mediator.Send(query);
+        }
+
+        [HttpPost("FullSearch")]
+        [Authorize()]
+        public async Task<BaseResponseDto<IEnumerable<BookAuthorFullSearchFilterResponseDto>>> FullSearch(BookAuthorFullSearchRequestDto search)
+        {
+            var command = new GetBookFullSearchSpQuery { fullSearch = search };
+            return await _mediator.Send(command); ;
         }
     }
 }

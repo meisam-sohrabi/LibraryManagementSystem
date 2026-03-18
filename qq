@@ -1,0 +1,48 @@
+[33mcommit 0bac528107bdad6b4a63e5b4d5a8f780421d4d88[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Tue Mar 17 02:08:18 2026 +0330
+
+    Adding fluent validation for returnBorrow service
+
+[33mcommit e8f93a21c86d3b662c8a047e2d506f98d219d5a4[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Mon Mar 16 19:33:50 2026 +0330
+
+    OTP SMS added in account controller (sandbox)
+
+[33mcommit d58c69d5927e157c10e855a0ce6075d3a8664af7[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Sun Mar 15 02:04:44 2026 +0330
+
+    Adding new feature to borrowing table
+    loanfee,totalloanfee,maxloanday...
+
+[33mcommit e5cdaaf7978ac6719d8dea3dbaf85ebb687cfb91[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Fri Mar 13 20:12:24 2026 +0330
+
+    Using memory cash in book controll-1404/12/22 20:12 pm
+
+[33mcommit 9f82b6acf003a546e0dcf275ad1b453ab6207eac[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Fri Mar 13 17:57:02 2026 +0330
+
+    Book Image Endpoint added successfully,but image path is not correct in db fix it later.
+
+[33mcommit 169bf935487b353ff8429eca4b287b16e97fb197[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Sun Feb 8 09:04:24 2026 +0330
+
+    adding more features
+
+[33mcommit 9683b5bb3203441bfcfa1908608b6b859f57ed42[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Tue Dec 30 12:24:56 2025 +0330
+
+    Add project files.
+
+[33mcommit c6ffae0aa28bbcc771dafbb284883774905b297d[m
+Author: meisam-sohrabi <meisam.sohrabi2@gmail.com>
+Date:   Tue Dec 30 12:24:52 2025 +0330
+
+    Add .gitattributes and .gitignore.
