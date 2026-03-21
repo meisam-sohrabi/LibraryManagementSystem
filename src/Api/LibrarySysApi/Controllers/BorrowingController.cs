@@ -22,7 +22,12 @@ namespace LibrarySysApi.Controllers
         [Authorize(Roles = "User")]
         public async Task<BaseResponseDto<string>> SetBorrow([FromBody] List<Guid> Books)
         {
-            var command = new BorrowingCommand { Id = Books, Email = HttpContext.User.FindFirstValue(ClaimTypes.Email) };
+            SetBorrowRequestDto borrow = new SetBorrowRequestDto
+            {
+                Email = User.FindFirstValue(ClaimTypes.Email),
+                Id = Books
+            };
+            var command = new BorrowingCommand { setBorrow = borrow };
             return await _mediator.Send(command);
         }
 
