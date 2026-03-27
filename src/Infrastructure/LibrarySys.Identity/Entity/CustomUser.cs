@@ -7,7 +7,5 @@ namespace LibrarySys.Identity.Entity
     {
         public string FullName { get; set; }
 
-        public ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();
-
     }
 }

@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using LibraryManagement.Test.Mock;
 using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Infrastructure;
+using LibrarySys.Application.Contract.Infrastructure.AuthorContract;
+using LibrarySys.Application.Contract.Infrastructure.BookContract;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Books.Handler.Command;
 using LibrarySys.Application.Features.Books.Request.Command;

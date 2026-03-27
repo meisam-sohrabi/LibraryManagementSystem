@@ -8,7 +8,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<UserPermission> builder)
         {
-            builder.ToTable("UserPermission");
+            builder.ToTable("UserPermission","Identity");
             builder.HasKey(c => new { c.UserId, c.PermissionId });
 
             builder.HasOne(c => c.User)
@@ -22,5 +22,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.EntityConfiguration
                 .OnDelete(DeleteBehavior.Restrict);
 
         }
+
+        
     }
 }

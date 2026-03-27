@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Infrastructure;
+using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Borrowings.Request.Command;
 using LibrarySys.Domain.Entity;

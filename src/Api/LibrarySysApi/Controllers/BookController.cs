@@ -47,7 +47,7 @@ namespace LibrarySysApi.Controllers
 
         [HttpGet("GetAll")]
         [Permission()]
-        //[Authorize()]
+        [Authorize()]
         public async Task<BaseResponseDto<IReadOnlyList<GetBookResponseDto>>> GetAll()
         {
             string casheKey = "Books-Key";

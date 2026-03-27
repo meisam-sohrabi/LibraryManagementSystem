@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Infrastructure;
+﻿using LibrarySys.Application.Contract.Infrastructure.AuthorContract;
 using LibrarySys.Domain.Entity;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;

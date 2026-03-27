@@ -11,8 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Account\Handler\Query\" />
+    <Folder Include="Features\Account\Request\Query\" />
     <Folder Include="Features\Members\Handler\Query\" />
     <Folder Include="Features\Members\Request\Query\" />
+    <Folder Include="Features\Permissions\" />
+    <Folder Include="RefreshTokens\Handler\Query\" />
+    <Folder Include="RefreshTokens\Request\Query\" />
   </ItemGroup>
 
   <ItemGroup>

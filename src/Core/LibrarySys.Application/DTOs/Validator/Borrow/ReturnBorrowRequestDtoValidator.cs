@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using LibrarySys.Application.Contract.Infrastructure;
+using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
 namespace LibrarySys.Application.DTOs.Validator.Borrow
 {
     public class ReturnBorrowRequestDtoValidator : AbstractValidator<ReturnBorrowRequestDto>

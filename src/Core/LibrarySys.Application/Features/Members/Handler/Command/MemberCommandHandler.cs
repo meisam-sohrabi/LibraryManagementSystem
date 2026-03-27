@@ -1,6 +1,6 @@
 ﻿using LibrarySys.Application.Contract;
 using LibrarySys.Application.Contract.IdentityService;
-using LibrarySys.Application.Contract.Infrastructure;
+using LibrarySys.Application.Contract.Infrastructure.MemberContract;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Members.Request.Command;
 using LibrarySys.Domain.Entity;

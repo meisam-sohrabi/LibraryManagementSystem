@@ -2,6 +2,7 @@
 using LibrarySys.Application.Features.Members.Request.Command;
 using LibrarySys.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySysApi.Controllers
@@ -17,6 +18,7 @@ namespace LibrarySysApi.Controllers
             _mediator = mediator;
         }
         [HttpPost("Add")]
+        [Authorize()]
         public async Task<BaseResponseDto<Member>> CreateMember(string Email)
         {
             var command = new MemberCommand { Email = Email };

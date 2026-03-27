@@ -1,4 +1,5 @@
-﻿using LibrarySys.Application.Contract.Infrastructure;
+﻿using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
+using LibrarySys.Application.Contract.Infrastructure.MemberContract;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Borrowings.Request.Query;
 using MediatR;

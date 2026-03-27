@@ -8,10 +8,17 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
-            builder.ToTable(nameof(Permission));
-            builder.HasKey(c=> c.Id);
-            builder.Property(p => p.Resource).IsRequired().HasMaxLength(120);
-            builder.Property(p => p.Action).IsRequired().HasMaxLength(120);
+            builder.ToTable(nameof(Permission), "Identity");
+            builder.HasKey(c => c.Id);
+            builder.Property(p => p.Resource)
+                .IsRequired()
+                .HasMaxLength(120);
+            builder.Property(p => p.Action)
+                .IsRequired()
+                .HasMaxLength(120);
+            builder.Property(c => c.Description)
+                .IsRequired(false);
         }
+
     }
 }

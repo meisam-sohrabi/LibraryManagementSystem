@@ -127,20 +127,6 @@ namespace LibrarySys.Infrastructure.Migrations
                     b.ToTable("Borrowings", "borrow");
                 });
 
-            modelBuilder.Entity("LibrarySys.Domain.Entity.CustomUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CustomUser");
-                });
-
             modelBuilder.Entity("LibrarySys.Domain.Entity.Member", b =>
                 {
                     b.Property<Guid>("Id")
@@ -172,7 +158,6 @@ namespace LibrarySys.Infrastructure.Migrations
                         .HasColumnType("nvarchar(120)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Resource")
@@ -182,7 +167,78 @@ namespace LibrarySys.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permission", (string)null);
+                    b.ToTable("Permission", "Identity");
+                });
+
+            modelBuilder.Entity("LibrarySys.Domain.Entity.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("RefreshToken", "Identity");
+                });
+
+            modelBuilder.Entity("LibrarySys.Domain.Entity.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("UserStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .HasDatabaseName("IX_User_Email");
+
+                    b.ToTable("User", "Identity");
                 });
 
             modelBuilder.Entity("LibrarySys.Domain.Entity.UserPermission", b =>
@@ -197,7 +253,47 @@ namespace LibrarySys.Infrastructure.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("UserPermission", (string)null);
+                    b.ToTable("UserPermission", "Identity");
+                });
+
+            modelBuilder.Entity("LibrarySys.Domain.Entity.UserSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LogoutTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LoginTime")
+                        .HasDatabaseName("IX_UserSession_LoginTime");
+
+                    b.HasIndex("LogoutTime")
+                        .HasDatabaseName("IX_UserSession_LogoutTime");
+
+                    b.HasIndex("UserName")
+                        .HasDatabaseName("IX_UserSession_UserName");
+
+                    b.HasIndex("UserName", "LoginTime")
+                        .HasDatabaseName("IX_UserSession_UserName_LoginTime");
+
+                    b.HasIndex("UserName", "LogoutTime")
+                        .HasDatabaseName("IX_UserSession_UserName_LogoutTime");
+
+                    b.ToTable("UserSession", "Identity");
                 });
 
             modelBuilder.Entity("LibrarySys.Domain.Entity.BookAuthor", b =>
@@ -238,6 +334,17 @@ namespace LibrarySys.Infrastructure.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("LibrarySys.Domain.Entity.RefreshToken", b =>
+                {
+                    b.HasOne("LibrarySys.Domain.Entity.User", "User")
+                        .WithOne("RefreshToken")
+                        .HasForeignKey("LibrarySys.Domain.Entity.RefreshToken", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LibrarySys.Domain.Entity.UserPermission", b =>
                 {
                     b.HasOne("LibrarySys.Domain.Entity.Permission", "Permission")
@@ -246,7 +353,7 @@ namespace LibrarySys.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("LibrarySys.Domain.Entity.CustomUser", "User")
+                    b.HasOne("LibrarySys.Domain.Entity.User", "User")
                         .WithMany("UserPermissions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -269,11 +376,6 @@ namespace LibrarySys.Infrastructure.Migrations
                     b.Navigation("Borrowings");
                 });
 
-            modelBuilder.Entity("LibrarySys.Domain.Entity.CustomUser", b =>
-                {
-                    b.Navigation("UserPermissions");
-                });
-
             modelBuilder.Entity("LibrarySys.Domain.Entity.Member", b =>
                 {
                     b.Navigation("Borrowings");
@@ -281,6 +383,13 @@ namespace LibrarySys.Infrastructure.Migrations
 
             modelBuilder.Entity("LibrarySys.Domain.Entity.Permission", b =>
                 {
+                    b.Navigation("UserPermissions");
+                });
+
+            modelBuilder.Entity("LibrarySys.Domain.Entity.User", b =>
+                {
+                    b.Navigation("RefreshToken");
+
                     b.Navigation("UserPermissions");
                 });
 #pragma warning restore 612, 618
