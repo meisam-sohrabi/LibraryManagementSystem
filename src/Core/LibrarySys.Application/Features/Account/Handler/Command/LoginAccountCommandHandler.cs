@@ -70,6 +70,7 @@ namespace LibrarySys.Application.Features.Account.Handler.Command
                     User = userExist,
                     CreatedAt = DateTime.UtcNow,
                     ExpireAt = DateTime.UtcNow.AddMinutes(5),
+                    IsRevoked = false
                 };
                 await _refreshTokenRepo.AddAsync(newRefreshToken);
                 finalRefreshToken = hashRefreshToken;
@@ -79,6 +80,7 @@ namespace LibrarySys.Application.Features.Account.Handler.Command
                 refreshTokenExist.Token = hashRefreshToken;
                 refreshTokenExist.CreatedAt = DateTime.UtcNow;
                 refreshTokenExist.ExpireAt = DateTime.UtcNow.AddMinutes(5);
+                refreshTokenExist.IsRevoked = false;
                 _refreshTokenRepo.Update(refreshTokenExist);
                 finalRefreshToken = hashRefreshToken;
             }

@@ -22,5 +22,11 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
         {
             return await _context.refreshToken.FirstOrDefaultAsync(c=> c.UserId == userId);  
         }
+
+        public async Task<RefreshToken> GetTokenWithFlag(string refreshToken)
+        {
+            return await _context.refreshToken.Where(c=> c.IsRevoked == false ).Where(c=> c.Token == refreshToken).Include(c => c.User).FirstOrDefaultAsync();
+
+        }
     }
 }

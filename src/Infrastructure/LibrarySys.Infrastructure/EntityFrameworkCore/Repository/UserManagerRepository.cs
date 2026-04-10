@@ -26,6 +26,11 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Repository
             await _context.AddAsync(user);
         }
 
+        public async Task<bool> ExistByEmail(string email)
+        {
+            return await _context.User.AnyAsync(c => c.Email == email);
+        }
+
         public async Task<bool> ExistById(string id)
         {
             return await _context.User.AnyAsync(c => c.Id == id);

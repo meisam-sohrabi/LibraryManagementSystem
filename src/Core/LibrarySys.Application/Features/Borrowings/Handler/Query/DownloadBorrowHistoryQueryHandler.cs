@@ -1,4 +1,5 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
+﻿using LibrarySys.Application.Contract.CurrentUser;
+using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
 using LibrarySys.Application.Contract.Infrastructure.MemberContract;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Borrowings.Request.Query;
@@ -8,20 +9,25 @@ using System.Net;
 namespace LibrarySys.Application.Features.Borrowings.Handler.Query
 {
 
-    public class DownloadBorrowHistoryQueryHandler : IRequestHandler<DownloadBorrowHistoryQuery, BaseResponseDto<FileStreamDto>>
+    public class DownloadBorrowHistoryQueryHandler : IRequestHandler<DownloadBorrowHistoryQuery, BaseResponseDto<List<BorrowingBackUpDto>>>
     {
         private readonly IMemberRepository _memberRepository;
+        private readonly ICurrentUserService _currentUser;
         private readonly IBorrowingRepository _borrowingRepository;
 
-        public DownloadBorrowHistoryQueryHandler(IMemberRepository memberRepository, IBorrowingRepository borrowingRepository)
+        public DownloadBorrowHistoryQueryHandler(IMemberRepository memberRepository,ICurrentUserService currentUser, IBorrowingRepository borrowingRepository)
         {
             _memberRepository = memberRepository;
+            _currentUser = currentUser;
             _borrowingRepository = borrowingRepository;
         }
-        public async Task<BaseResponseDto<FileStreamDto>> Handle(DownloadBorrowHistoryQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResponseDto<List<BorrowingBackUpDto>>> Handle(DownloadBorrowHistoryQuery request, CancellationToken cancellationToken)
         {
-            var output = new BaseResponseDto<FileStreamDto>();
-            var memberExist = await _memberRepository.GetMember(request.Email);
+
+            Console.WriteLine($"ip address:{_currentUser.IPAddress},Email:{_currentUser.Email},UserId:{_currentUser.UserId}");
+
+            var output = new BaseResponseDto<List<BorrowingBackUpDto>>();
+            var memberExist = await _memberRepository.GetMember(_currentUser.Email);
             if (memberExist == null)
             {
                 output.Success = false;
@@ -42,7 +48,7 @@ namespace LibrarySys.Application.Features.Borrowings.Handler.Query
                     {
                         new BorrowingDto
                         {
-                            BookTitle = c.Book.Title ?? "اسم کتاب یافت نشد",
+                            BookTitle = c.Book?.Title ?? "اسم کتاب یافت نشد",
                             BorrowDate = c.BorrowDate,
                             ReturnDate = c.ReturnDate
                         }
@@ -55,25 +61,14 @@ namespace LibrarySys.Application.Features.Borrowings.Handler.Query
                 output.Success = false;
                 return output;
             }
-            var stream = ExportToJson(backupDto);
             output.Message = "دیتا با موفقت نسخه پشتیبان گرفته شد";
             output.StatusCode = HttpStatusCode.OK;
             output.Success = true;
-            output.Data = stream;
+            output.Data = backupDto;
             return output;
 
         }
 
-        private FileStreamDto ExportToJson(List<BorrowingBackUpDto> backupData)
-        {
-            var json = System.Text.Json.JsonSerializer.Serialize(backupData);
-            var fileStreamDto = new FileStreamDto
-            {
-                stream = System.Text.Encoding.UTF8.GetBytes(json),
-                Type = "application/json",
-                FileName = $"BorrowHistory_{DateTime.Now}.json"
-            };
-            return fileStreamDto;
-        }
+        
     }
 }

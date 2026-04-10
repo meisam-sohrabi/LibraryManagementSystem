@@ -44,11 +44,11 @@ namespace LibrarySysApi.Controllers
 
         [HttpGet("download-my-history")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> DownloadBackup(string Email)
+        public async Task<BaseResponseDto<List<BorrowingBackUpDto>>> DownloadBackup()
         {
-            var command = new DownloadBorrowHistoryQuery { Email = HttpContext.User.FindFirstValue(ClaimTypes.Email) };
-            var fileBytes = await _mediator.Send(command);
-            return File(fileBytes.Data.stream, "application/json", fileBytes.Data.FileName);
+            var command = new DownloadBorrowHistoryQuery();
+            return await _mediator.Send(command);
+          
         }
 
 

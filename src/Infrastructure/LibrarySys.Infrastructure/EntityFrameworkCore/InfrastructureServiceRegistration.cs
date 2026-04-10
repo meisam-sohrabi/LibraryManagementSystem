@@ -1,5 +1,6 @@
 ﻿using LibrarySys.Application.Contract;
 using LibrarySys.Application.Contract.BookAuthorService;
+using LibrarySys.Application.Contract.CurrentUser;
 using LibrarySys.Application.Contract.FileService;
 using LibrarySys.Application.Contract.Infrastructure.AuthorContract;
 using LibrarySys.Application.Contract.Infrastructure.BookContract;
@@ -60,6 +61,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
             services.AddScoped<IFileStorageService,LocalFileStorageService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             return services;
         }
     }

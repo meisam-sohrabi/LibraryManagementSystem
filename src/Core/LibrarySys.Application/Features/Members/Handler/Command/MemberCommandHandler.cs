@@ -1,6 +1,7 @@
 ﻿using LibrarySys.Application.Contract;
 using LibrarySys.Application.Contract.IdentityService;
 using LibrarySys.Application.Contract.Infrastructure.MemberContract;
+using LibrarySys.Application.Contract.Infrastructure.UserContract;
 using LibrarySys.Application.DTOs;
 using LibrarySys.Application.Features.Members.Request.Command;
 using LibrarySys.Domain.Entity;
@@ -12,15 +13,15 @@ namespace LibrarySys.Application.Features.Members.Handler.Command
     {
         private readonly IMemberRepository _memberRepository;
         private readonly IUnitOfWork _uow;
-        private readonly IAuthService _authService;
+        private readonly IUserManagerRepository _userManager;
 
         public MemberCommandHandler(IMemberRepository memberRepository
             , IUnitOfWork uow
-            , IAuthService authService)
+            , IUserManagerRepository userManager)
         {
             _memberRepository = memberRepository;
             _uow = uow;
-            _authService = authService;
+            _userManager = userManager;
         }
         public async Task<BaseResponseDto<Member>> Handle(MemberCommand request, CancellationToken cancellationToken)
         {
@@ -32,7 +33,7 @@ namespace LibrarySys.Application.Features.Members.Handler.Command
                 output.Success = false;
                 return output;
             }
-            var userRegistered = await _authService.UserExist(request.Email);
+            var userRegistered = await _userManager.ExistByEmail(request.Email);
             if (!userRegistered)
             {
                 output.Message = "ابتدا باید در سامانه ثبت نام کنید";

@@ -1,9 +1,11 @@
 using LibrarySys.Application;
+using LibrarySys.Application.Contract.CurrentUser;
 using LibrarySys.Application.Contract.IdentityService;
 using LibrarySys.Application.Option;
 using LibrarySys.Identity;
 using LibrarySys.Identity.Service;
 using LibrarySys.Infrastructure.EntityFrameworkCore;
+using LibrarySysApi.CurrentUser;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,9 +61,9 @@ builder.Services.AddMiniProfiler(option =>
 }).AddEntityFramework();
 
 
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
-
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
 var app = builder.Build();
