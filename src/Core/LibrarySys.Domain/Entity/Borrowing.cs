@@ -1,6 +1,6 @@
 ﻿namespace LibrarySys.Domain.Entity
 {
-    public class Borrowing
+    public class Borrowing : BaseClass
     {
         public Guid Id { get; set; }
         public DateTime BorrowDate { get; set; } 

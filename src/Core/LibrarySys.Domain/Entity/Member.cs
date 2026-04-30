@@ -1,6 +1,6 @@
 ﻿namespace LibrarySys.Domain.Entity
 {
-    public class Member
+    public class Member : BaseClass
     {
         public Guid Id { get; set; } 
         public string Email { get; set; }

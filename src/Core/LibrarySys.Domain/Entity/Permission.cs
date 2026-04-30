@@ -1,6 +1,6 @@
 ﻿namespace LibrarySys.Domain.Entity
 {
-    public class Permission
+    public class Permission : BaseClass
     {
         public Guid Id { get; set; }
         public string Resource { get; set; }

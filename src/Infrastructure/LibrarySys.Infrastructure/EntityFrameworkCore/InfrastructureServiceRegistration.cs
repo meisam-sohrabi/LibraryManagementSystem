@@ -15,6 +15,7 @@ using LibrarySys.Application.Contract.Token;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Repository;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Service;
+using LibrarySys.Infrastructure.Interceptor;
 using LibrarySys.Infrastructure.Jobs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
             services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseSqlServer(configuration["ConnectionStrings:LibraryManagementConnection"]);
+                opt.AddInterceptors(new AuditInterceptor());
             });
 
             services.AddQuartz(opt =>

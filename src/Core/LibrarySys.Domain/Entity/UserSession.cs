@@ -1,6 +1,6 @@
 ﻿namespace LibrarySys.Domain.Entity
 {
-    public class UserSession
+    public class UserSession : BaseClass
     {
         public Guid Id { get; set; }
         public DateTime LoginTime { get; set; }

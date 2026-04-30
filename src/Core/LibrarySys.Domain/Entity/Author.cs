@@ -2,7 +2,7 @@
 
 namespace LibrarySys.Domain.Entity
 {
-    public class Author
+    public class Author: BaseClass
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
