@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.CurrentUser;
+﻿using LibrarySys.Application.Common.Interfaces.CurrentUser;
 using System.Security.Claims;
 
 namespace LibrarySysApi.CurrentUser

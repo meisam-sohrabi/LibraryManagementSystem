@@ -1,5 +1,5 @@
 ﻿using LibraryManagement.Test.Mock;
-using LibrarySys.Application.Contract.Infrastructure.BookContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.BookContract;
 using Moq;
 using Shouldly;
 

@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
+﻿using LibrarySys.Application.Common.Interfaces.Infrastructure.BorrowingContract;
 using LibrarySys.Domain.Entity;
 using Moq;
 

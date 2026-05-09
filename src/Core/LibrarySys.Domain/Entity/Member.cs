@@ -1,4 +1,6 @@
-﻿namespace LibrarySys.Domain.Entity
+﻿
+
+namespace LibrarySys.Domain.Entity
 {
     public class Member : BaseClass
     {

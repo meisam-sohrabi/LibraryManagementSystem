@@ -9,6 +9,11 @@ using System.Text;
 
 namespace LibrarySysApi.Attributes
 {
+
+    /// <summary>
+    /// this attribute check the jwt token one more time if the invader tries to overlook the algoritm
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method)]
     public class PermissionAttribute : Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)

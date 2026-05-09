@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
 using LibrarySys.Application.Features.Borrowings.Request.Command;
 using LibrarySys.Application.Features.Borrowings.Request.Query;
 using MediatR;

@@ -1,9 +1,8 @@
-﻿using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Infrastructure.BookContract;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.BookContract;
 using LibrarySys.Application.Features.Books.Request.Command;
 using LibrarySys.Domain.Entity;
-using MediatR;
 using System.Net;
 
 namespace LibrarySys.Application.Features.Books.Handler.Command

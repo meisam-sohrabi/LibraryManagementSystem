@@ -1,11 +1,9 @@
-﻿using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.IdentityService;
-using LibrarySys.Application.Contract.Infrastructure.MemberContract;
-using LibrarySys.Application.Contract.Infrastructure.UserContract;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.MemberContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.UserContract;
 using LibrarySys.Application.Features.Members.Request.Command;
 using LibrarySys.Domain.Entity;
-using MediatR;
 using System.Net;
 namespace LibrarySys.Application.Features.Members.Handler.Command
 {

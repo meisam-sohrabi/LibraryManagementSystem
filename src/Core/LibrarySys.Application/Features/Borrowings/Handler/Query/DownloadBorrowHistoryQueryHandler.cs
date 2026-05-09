@@ -1,9 +1,8 @@
-﻿using LibrarySys.Application.Contract.CurrentUser;
-using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
-using LibrarySys.Application.Contract.Infrastructure.MemberContract;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces.CurrentUser;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.BorrowingContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.MemberContract;
 using LibrarySys.Application.Features.Borrowings.Request.Query;
-using MediatR;
 using System.Net;
 
 namespace LibrarySys.Application.Features.Borrowings.Handler.Query

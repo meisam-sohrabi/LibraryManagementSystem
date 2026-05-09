@@ -1,11 +1,10 @@
-﻿using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Infrastructure.RefreshTokenContract;
-using LibrarySys.Application.Contract.Infrastructure.UserContract;
-using LibrarySys.Application.Contract.Token;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.RefreshTokenContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.UserContract;
+using LibrarySys.Application.Common.Interfaces.Token;
 using LibrarySys.Application.Features.Account.Request.Command;
 using LibrarySys.Domain.Entity;
-using MediatR;
 using System.Net;
 namespace LibrarySys.Application.Features.Account.Handler.Command
 {

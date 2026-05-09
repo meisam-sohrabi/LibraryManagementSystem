@@ -1,5 +1,5 @@
-﻿using LibrarySys.Application.Contract.FileService;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces.FileService;
 using LibrarySys.Application.Features.Books.Request.Command;
 using LibrarySys.Application.Features.Books.Request.Query;
 using LibrarySysApi.Attributes;

@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.GenericContract;
+﻿using LibrarySys.Application.Common.Interfaces.Infrastructure.GenericContract;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract;
+﻿using LibrarySys.Application.Common.Interfaces;
 using Moq;
 
 namespace LibraryManagement.Test.Mock

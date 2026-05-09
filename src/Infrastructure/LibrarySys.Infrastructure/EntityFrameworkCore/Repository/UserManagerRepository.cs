@@ -1,5 +1,5 @@
 ﻿using BCrypt.Net;
-using LibrarySys.Application.Contract.Infrastructure.UserContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.UserContract;
 using LibrarySys.Domain.Entity;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;

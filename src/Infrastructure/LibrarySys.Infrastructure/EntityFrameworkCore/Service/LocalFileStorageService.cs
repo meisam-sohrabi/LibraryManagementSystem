@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.FileService;
+﻿using LibrarySys.Application.Common.Interfaces.FileService;
 using LibrarySys.Application.Option;
 using Microsoft.Extensions.Options;
 

@@ -1,5 +1,5 @@
-﻿using LibrarySys.Application.Contract.BookAuthorService;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces.BookAuthorService;
 using Moq;
 
 namespace LibraryManagement.Test.Mock

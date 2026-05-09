@@ -1,4 +1,5 @@
-﻿namespace LibrarySys.Domain.Entity
+﻿
+namespace LibrarySys.Domain.Entity
 {
     public class UserPermission : BaseClass
     {

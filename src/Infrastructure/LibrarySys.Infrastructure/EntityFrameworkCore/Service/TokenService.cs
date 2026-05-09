@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Token;
+﻿using LibrarySys.Application.Common.Interfaces.Token;
 using LibrarySys.Application.Option;
 using LibrarySys.Domain.Entity;
 using Microsoft.Extensions.Options;

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.IdentityService;
-using LibrarySys.Application.DTOs;
+using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.IdentityService;
 using LibrarySys.Application.Option;
 using LibrarySys.Identity.Entity;
 using Microsoft.AspNetCore.Http.Headers;

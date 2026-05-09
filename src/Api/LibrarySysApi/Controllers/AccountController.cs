@@ -1,7 +1,7 @@
-﻿using LibrarySys.Application.Contract.IdentityService;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces.IdentityService;
 using LibrarySys.Application.Features.Account.Request.Command;
-using LibrarySys.Application.RefreshTokens.Request.Command;
+using LibrarySys.Application.Features.RefreshTokens.Request.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +32,17 @@ namespace LibrarySysApi.Controllers
         [HttpPost("Login")]
         public async Task<BaseResponseDto<Tuple<string, string>>> Login([FromBody] LoginDto loginRequest)
         {
-            LoginAccountCommand command = new LoginAccountCommand { Login = loginRequest };
-            return await _mediator.Send(command);
+            // if we use behavior we need to add try catch for controllers 
+
+            //try
+            //{
+                LoginAccountCommand command = new LoginAccountCommand { Login = loginRequest };
+                return await _mediator.Send(command);
+            //}
+            //catch (Exception ex)
+            //{
+            //   return new BaseResponseDto<Tuple<string, string>> { };
+            //}
         }
 
 

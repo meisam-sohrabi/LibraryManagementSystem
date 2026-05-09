@@ -1,6 +1,6 @@
 ﻿using LibraryManagement.Test.Mock;
-using LibrarySys.Application.Contract.BookAuthorService;
-using LibrarySys.Application.DTOs;
+using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces.BookAuthorService;
 using LibrarySys.Application.Features.Books.Handler.Query;
 using LibrarySys.Application.Features.Books.Request.Query;
 using Moq;

@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using LibrarySys.Application.DTOs.Validator.Books;
+﻿using LibrarySys.Application.Common.Behaviors;
+using LibrarySys.Application.Common.DTOs.Validator.Books;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LibrarySys.Application
@@ -11,6 +11,7 @@ namespace LibrarySys.Application
             services.AddMediatR(opt =>
             {
                 opt.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
+                opt.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             });
             services.AddValidatorsFromAssemblyContaining<BookAuthRequestDtoValidator>();
             return services;

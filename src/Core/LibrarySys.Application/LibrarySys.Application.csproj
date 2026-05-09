@@ -16,8 +16,8 @@
     <Folder Include="Features\Members\Handler\Query\" />
     <Folder Include="Features\Members\Request\Query\" />
     <Folder Include="Features\Permissions\" />
-    <Folder Include="RefreshTokens\Handler\Query\" />
-    <Folder Include="RefreshTokens\Request\Query\" />
+    <Folder Include="Features\RefreshTokens\Handler\Query\" />
+    <Folder Include="Features\RefreshTokens\Request\Query\" />
   </ItemGroup>
 
   <ItemGroup>

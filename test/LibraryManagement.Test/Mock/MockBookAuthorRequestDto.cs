@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using LibrarySys.Application.DTOs;
+using LibrarySys.Application.Common.DTOs;
 using Moq;
 
 namespace LibraryManagement.Test.Mock

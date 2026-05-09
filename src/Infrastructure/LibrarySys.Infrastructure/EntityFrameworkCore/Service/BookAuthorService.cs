@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using LibrarySys.Application.Contract.BookAuthorService;
-using LibrarySys.Application.DTOs;
+using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces.BookAuthorService;
 using LibrarySys.Domain.Entity;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;

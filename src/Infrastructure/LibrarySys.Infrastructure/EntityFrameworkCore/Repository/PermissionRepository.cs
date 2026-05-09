@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.PermissionContract;
+﻿using LibrarySys.Application.Common.Interfaces.Infrastructure.PermissionContract;
 using LibrarySys.Domain.Entity;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 

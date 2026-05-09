@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.IdentityService;
+﻿using LibrarySys.Application.Common.Interfaces.IdentityService;
 using LibrarySys.Identity.Context;
 using LibrarySys.Identity.Entity;
 using LibrarySys.Identity.Service;

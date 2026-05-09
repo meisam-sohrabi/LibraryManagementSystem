@@ -1,10 +1,10 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.UserContract;
-using LibrarySys.Domain.Entity;
+﻿using LibrarySys.Domain.Entity;
 using Quartz;
 using LibrarySys.Domain.Enum;
-using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Infrastructure.PermissionContract;
-using LibrarySys.Application.Contract.Infrastructure.UserPermissionContract;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.UserContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.UserPermissionContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.PermissionContract;
 namespace LibrarySys.Infrastructure.Jobs
 {
     public class SeedDataJob : IJob

@@ -1,4 +1,4 @@
-﻿using LibrarySys.Domain.Entity;
+﻿using LibrarySys.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 

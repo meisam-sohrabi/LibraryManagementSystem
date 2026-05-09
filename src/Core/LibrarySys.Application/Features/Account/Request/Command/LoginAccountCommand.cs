@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
 using MediatR;
 
 namespace LibrarySys.Application.Features.Account.Request.Command

@@ -1,11 +1,10 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.UserContract;
-using LibrarySys.Application.DTOs;
-using LibrarySys.Application.Features.Account.Request.Command;
+﻿using LibrarySys.Application.Features.Account.Request.Command;
 using LibrarySys.Domain.Entity;
-using MediatR;
 using System.Net;
 using LibrarySys.Domain.Enum;
-using LibrarySys.Application.Contract;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.UserContract;
+using LibrarySys.Application.Common.DTOs;
 namespace LibrarySys.Application.Features.Account.Handler.Command
 {
     public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, BaseResponseDto<string>>

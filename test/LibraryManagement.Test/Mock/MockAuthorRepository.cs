@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.AuthorContract;
+﻿using LibrarySys.Application.Common.Interfaces.Infrastructure.AuthorContract;
 using LibrarySys.Domain.Entity;
 using Moq;
 

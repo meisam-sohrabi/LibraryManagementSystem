@@ -1,11 +1,12 @@
 using LibrarySys.Application;
-using LibrarySys.Application.Contract.CurrentUser;
-using LibrarySys.Application.Contract.IdentityService;
+using LibrarySys.Application.Common.Interfaces.CurrentUser;
+using LibrarySys.Application.Common.Interfaces.IdentityService;
 using LibrarySys.Application.Option;
 using LibrarySys.Identity;
 using LibrarySys.Identity.Service;
 using LibrarySys.Infrastructure.EntityFrameworkCore;
 using LibrarySysApi.CurrentUser;
+using LibrarySysApi.Middleware;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +78,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

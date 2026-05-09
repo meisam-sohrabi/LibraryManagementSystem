@@ -1,4 +1,4 @@
-﻿using LibrarySys.Application.Contract.Infrastructure.RefreshTokenContract;
+﻿using LibrarySys.Application.Common.Interfaces.Infrastructure.RefreshTokenContract;
 using LibrarySys.Domain.Entity;
 using LibrarySys.Infrastructure.EntityFrameworkCore.Context;
 using Microsoft.EntityFrameworkCore;

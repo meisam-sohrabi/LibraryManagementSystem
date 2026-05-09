@@ -1,11 +1,10 @@
-﻿using LibrarySys.Application.Contract;
-using LibrarySys.Application.Contract.Infrastructure.BookContract;
-using LibrarySys.Application.Contract.Infrastructure.BorrowingContract;
-using LibrarySys.Application.Contract.Infrastructure.MemberContract;
-using LibrarySys.Application.DTOs;
+﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.Interfaces;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.BookContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.BorrowingContract;
+using LibrarySys.Application.Common.Interfaces.Infrastructure.MemberContract;
 using LibrarySys.Application.Features.Borrowings.Request.Command;
 using LibrarySys.Domain.Entity;
-using MediatR;
 using System.Net;
 namespace LibrarySys.Application.Features.Borrowings.Handler.Command
 {
