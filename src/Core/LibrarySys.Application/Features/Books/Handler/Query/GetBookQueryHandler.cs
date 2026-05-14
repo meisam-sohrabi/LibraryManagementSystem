@@ -15,7 +15,6 @@ namespace LibrarySys.Application.Features.Books.Handler.Query
         public async Task<BaseResponseDto<BookAuthorRequestDto>> Handle(GetBookQuery request, CancellationToken cancellationToken)
         {
             var output = new BaseResponseDto<BookAuthorRequestDto>();
-
             var book = await _bookAuthorService.GetByIdWithAuthor(request.Id);
             if (book == null)
             {
