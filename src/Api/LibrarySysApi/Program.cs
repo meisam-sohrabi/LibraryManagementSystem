@@ -8,9 +8,21 @@ using LibrarySys.Infrastructure.EntityFrameworkCore;
 using LibrarySysApi.CurrentUser;
 using LibrarySysApi.Middleware;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
+
+
+// Add serilog using elastic search with kibana
+
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -61,6 +73,7 @@ builder.Services.AddMiniProfiler(option =>
     option.RouteBasePath = "/profiler";
 }).AddEntityFramework();
 
+builder.Host.UseSerilog();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
@@ -70,7 +83,7 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -78,6 +91,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseSerilogRequestLogging();
 
 app.UseGlobalExtentionMiddleware();
 
