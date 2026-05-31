@@ -3,14 +3,14 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
 # Copy csproj (relative to build context root)
-COPY src/api/LibrarySysApi/*.csproj ./src/api/LibrarySysApi/
-RUN dotnet restore ./src/api/LibrarySysApi/LibrarySysApi.csproj
+COPY src/Api/LibrarySysApi/*.csproj ./src/Api/LibrarySysApi/
+RUN dotnet restore ./src/Api/LibrarySysApi/LibrarySysApi.csproj
 
 # Copy everything from the repo root
 COPY . .
 
 # Build the project
-WORKDIR /app/src/api/LibrarySysApi
+WORKDIR /app/src/Api/LibrarySysApi
 RUN dotnet build LibrarySysApi.csproj -c Release -o /app/build
 
 # ---- Publish Stage ----

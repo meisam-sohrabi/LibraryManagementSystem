@@ -1,4 +1,5 @@
 ﻿using LibrarySys.Domain.Entity;
+using LibrarySys.Infrastructure.Extentions;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibrarySys.Infrastructure.EntityFrameworkCore.Context
@@ -20,6 +21,7 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            modelBuilder.Seed();
         }
     }
 }
