@@ -67,7 +67,7 @@ namespace LibrarySys.Application.Features.RefreshTokens.Handler.Command
                 // 4. Update db
 
                 _refreshToken.Update(getRefreshToken);
-                await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
                 await _unitOfWork.CommitTransactionAsync();
                 outPut.Message = "رفرش توکن ایجاد شد";
                 outPut.Success = true;

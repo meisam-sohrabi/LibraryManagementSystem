@@ -1,6 +1,5 @@
 ﻿using LibrarySys.Application.Common.Errors;
-using System.Net;
-
+using LibrarySys.Application.Common.Exceptions;
 namespace LibrarySysApi.Middleware;
 
 
@@ -44,6 +43,10 @@ public class ExceptionMiddleware
                 (StatusCodes.Status401Unauthorized, "Unauthorized access."),
             KeyNotFoundException =>
                 (StatusCodes.Status404NotFound, "Resource not found."),
+            FluentValidation.ValidationException fluent  =>
+            (StatusCodes.Status400BadRequest, fluent.Errors.Select(c=> c.ErrorMessage).ToString()),
+            GlobalException =>
+            (StatusCodes.Status500InternalServerError, "There is something wrong in the request."),
             _ => (StatusCodes.Status500InternalServerError, "An unexpected error occurred. Please try again.")
         };
 

@@ -54,7 +54,7 @@ namespace LibrarySys.Application.Features.Members.Handler.Command
             };
 
             await _memberRepository.AddAsync(member);
-            await _uow.SaveChangesAsync();
+            await _uow.SaveChangesAsync(cancellationToken);
 
             output.Message = "عضو جدید ایجاد شد";
             output.StatusCode = HttpStatusCode.OK;

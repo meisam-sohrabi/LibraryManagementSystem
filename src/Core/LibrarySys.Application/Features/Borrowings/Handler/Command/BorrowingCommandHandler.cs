@@ -87,7 +87,7 @@ namespace LibrarySys.Application.Features.Borrowings.Handler.Command
 
 
                     await _borrowingRepository.AddRangeAsync(borrowings);
-                    await _uow.SaveChangesAsync();
+                    await _uow.SaveChangesAsync(cancellationToken);
                     await _uow.CommitTransactionAsync();
                     output.Message = "امانت کتاب ها باموفقیت ثبت شد";
                     output.StatusCode = HttpStatusCode.OK;

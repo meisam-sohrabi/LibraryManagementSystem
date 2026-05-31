@@ -31,7 +31,7 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
             }
             bookExist.ImageUrl = request.ImageUrl;
             _bookRepository.Update(bookExist);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             outPut.Message = $"تصویر مورد نظر برای کتاب {bookExist.Title} ثبت شد";
             outPut.StatusCode = HttpStatusCode.OK;
             outPut.Success = true;

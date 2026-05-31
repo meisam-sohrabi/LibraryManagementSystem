@@ -1,5 +1,7 @@
 ﻿using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.DTOs.Validator.Books;
 using LibrarySys.Application.Common.Interfaces.FileService;
+using LibrarySys.Application.Features.Books.Handler.Command;
 using LibrarySys.Application.Features.Books.Request.Command;
 using LibrarySys.Application.Features.Books.Request.Query;
 using LibrarySysApi.Attributes;
@@ -25,6 +27,8 @@ namespace LibrarySysApi.Controllers
             _cashe = cashe;
         }
         [HttpPost("Add")]
+        [ServiceFilter(typeof(ValidationFilter<BookAuthorRequestDto>))]
+        //[TypeFilter(typeof(ValidationFilter<BookCommand>))]
         public async Task<BaseResponseDto<BookAuthorRequestDto>> CreateBook([FromBody] BookAuthorRequestDto bookAuthorRequest)
         {
             var command = new BookCommand { BookAuthorRequest = bookAuthorRequest };

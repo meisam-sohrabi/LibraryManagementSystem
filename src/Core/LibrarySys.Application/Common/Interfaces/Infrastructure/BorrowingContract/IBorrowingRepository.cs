@@ -8,6 +8,6 @@ namespace LibrarySys.Application.Common.Interfaces.Infrastructure.BorrowingContr
         Task<bool> isBorrowedAsync(Guid bookId);
         Task<List<Borrowing>> GetAllByMemberIdAsync(Guid memberId);
         Task<Borrowing> GetByReturnCodeAsync(Guid returnCode);
-        Task<bool> ReturnCodeExist(Guid returnCode);
+        Task<bool> ReturnCodeExist(Guid returnCodeoken);
     }
 }

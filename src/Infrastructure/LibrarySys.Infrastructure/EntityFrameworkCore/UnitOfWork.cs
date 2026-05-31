@@ -17,9 +17,9 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
             _context.SaveChanges();
         }
 
-        public async Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync(CancellationToken token)
         {
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync(token);
         }
         public void BeginTransaction()
         {
@@ -49,6 +49,11 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
         public async Task RollBackTransactionAsync()
         {
             await _context.Database.RollbackTransactionAsync();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

@@ -11,7 +11,9 @@ namespace LibrarySys.Application
             services.AddMediatR(opt =>
             {
                 opt.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
+                //opt.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
                 opt.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
             });
             services.AddValidatorsFromAssemblyContaining<BookAuthRequestDtoValidator>();
             return services;

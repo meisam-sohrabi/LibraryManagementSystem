@@ -3,6 +3,7 @@
     public interface IUnitOfWork
     {
         void Save();
+        Task<int> SaveChangesAsync(CancellationToken token);
         Task<int> SaveChangesAsync();
         void BeginTransaction();
         Task BeginTransactionAsync();

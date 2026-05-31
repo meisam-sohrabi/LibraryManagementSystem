@@ -13,7 +13,7 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly IUnitOfWork _uow;
-        private readonly IValidator<BookAuthorRequestDto> _validator;
+        //private readonly IValidator<BookAuthorRequestDto> _validator;
         public BookCommandHandler(IBookRepository bookRepository
             , IAuthorRepository authorRepository
             , IUnitOfWork uow
@@ -22,21 +22,21 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
             _bookRepository = bookRepository;
             _authorRepository = authorRepository;
             _uow = uow;
-            _validator = validator;
+            //_validator = validator;
         }
         public async Task<BaseResponseDto<BookAuthorRequestDto>> Handle(BookCommand request, CancellationToken cancellationToken)
         {
             var output = new BaseResponseDto<BookAuthorRequestDto>();
 
-            var validation = await _validator.ValidateAsync(request.BookAuthorRequest);
-            if (!validation.IsValid)
-            {
-                output.Message = "خطاهای اعتبارسنجی رخ داده است.";
-                output.Success = false;
-                output.StatusCode = HttpStatusCode.BadRequest;
-                output.ValidationErrors = validation.ToDictionary();
-                return output;
-            }
+            //var validation = await _validator.ValidateAsync(request.BookAuthorRequest);
+            //if (!validation.IsValid)
+            //{
+            //    output.Message = "خطاهای اعتبارسنجی رخ داده است.";
+            //    output.Success = false;
+            //    output.StatusCode = HttpStatusCode.BadRequest;
+            //    output.ValidationErrors = validation.ToDictionary();
+            //    return output;
+            //}
 
             var bookExist = await _bookRepository.ExistByTitleAndGenre(request.BookAuthorRequest.Title, request.BookAuthorRequest.Genere);
             if (bookExist)
@@ -73,7 +73,7 @@ namespace LibrarySys.Application.Features.Books.Handler.Command
 
 
                 await _bookRepository.AddAsync(book);
-                await _uow.SaveChangesAsync();
+                await _uow.SaveChangesAsync(cancellationToken);
                 await _uow.CommitTransactionAsync();
 
                 output.Message = "کتاب و نویسنده ایجاد شد";

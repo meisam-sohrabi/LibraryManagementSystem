@@ -1,10 +1,14 @@
 using LibrarySys.Application;
+using LibrarySys.Application.Common.DTOs;
+using LibrarySys.Application.Common.DTOs.Validator.Books;
 using LibrarySys.Application.Common.Interfaces.CurrentUser;
 using LibrarySys.Application.Common.Interfaces.IdentityService;
+using LibrarySys.Application.Features.Books.Request.Command;
 using LibrarySys.Application.Option;
 using LibrarySys.Identity;
 using LibrarySys.Identity.Service;
 using LibrarySys.Infrastructure.EntityFrameworkCore;
+using LibrarySysApi.Attributes;
 using LibrarySysApi.CurrentUser;
 using LibrarySysApi.Middleware;
 using Microsoft.OpenApi.Models;
@@ -78,12 +82,12 @@ builder.Host.UseSerilog();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<IAuthService, AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-
+builder.Services.AddScoped<ValidationFilter<BookAuthorRequestDto>>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsProduction())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

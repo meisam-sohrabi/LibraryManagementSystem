@@ -66,7 +66,7 @@ namespace LibrarySys.Application.Features.Account.Handler.Command
                 // .5 add user in db
                 await _userManagerRepo.CreateAsync(identityUser);
 
-                await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
                 await _unitOfWork.CommitTransactionAsync();
 
                 outPut.Message = $"کاربر {identityUser.FullName} باموفقیت ثب شد";
