@@ -4,9 +4,13 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c9d309d6-f14a-4352-a050-4fe42e78c88e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
 	  <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.5.4" />
 	  <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.5.4" />
 	  <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
