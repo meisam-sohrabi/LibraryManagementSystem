@@ -11,9 +11,13 @@ using LibrarySys.Infrastructure.EntityFrameworkCore;
 using LibrarySysApi.Attributes;
 using LibrarySysApi.CurrentUser;
 using LibrarySysApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
+using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -30,7 +34,36 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
+//builder.Services.AddOpenApi(options =>
+//{
+//    options.AddDocumentTransformer((document, context, cancellationToken) =>
+//    {
+//        document.Components ??= new();
+//        document.Components.SecuritySchemes.Add("Bearer", new OpenApiSecurityScheme
+//        {
+//            Type = SecuritySchemeType.Http,
+//            Scheme = "Bearer",
+//            BearerFormat = "JWT"
+//        });
+
+//        document.SecurityRequirements.Add(new OpenApiSecurityRequirement
+//        {
+//            {
+//                new OpenApiSecurityScheme
+//                {
+//                    Reference = new OpenApiReference
+//                    {
+//                        Type = ReferenceType.SecurityScheme,
+//                        Id = "Bearer"
+//                    }
+//                },
+//                Array.Empty<string>()
+//            }
+//        });
+
+//        return Task.CompletedTask;
+//    });
+//});
 
 builder.Services.ApplicationConfiguration();
 builder.Services.InfrastructureConfiguration(builder.Configuration);
@@ -91,6 +124,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    //app.MapOpenApi();
+    //app.MapScalarApiReference();
 
 }
 

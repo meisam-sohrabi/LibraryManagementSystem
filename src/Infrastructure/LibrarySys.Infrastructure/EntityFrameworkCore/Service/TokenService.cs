@@ -11,15 +11,15 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Service
 {
     public class TokenService : ITokenService
     {
-        private readonly IOptions<JwtOption> _jwtOptoin;
+        private readonly IOptions<JwtOption> _jwtOption;
 
-        public TokenService(IOptions<JwtOption> jwtOptoin)
+        public TokenService(IOptions<JwtOption> jwtOption)
         {
-            _jwtOptoin = jwtOptoin;
+            _jwtOption = jwtOption;
         }
         public string GenerateJWT(User user)
         {
-            var secreteKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptoin.Value.Key));
+            var secreteKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOption.Value.Key));
             var signingKey = new SigningCredentials(secreteKey, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
             {
@@ -30,8 +30,8 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore.Service
             };
 
             var jwtConfig = new JwtSecurityToken(
-            issuer: _jwtOptoin.Value.Issuer,
-            audience: _jwtOptoin.Value.Audience,
+            issuer: _jwtOption.Value.Issuer,
+            audience: _jwtOption.Value.Audience,
             claims: claims,
             expires: DateTime.UtcNow.AddMinutes(60),
             signingCredentials: signingKey);

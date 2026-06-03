@@ -31,7 +31,8 @@ namespace LibrarySys.Infrastructure.EntityFrameworkCore
         {
             services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseSqlServer(configuration["ConnectionStrings:LibraryManagementConnection"]);
+                //opt.UseSqlServer(configuration["ConnectionStrings:LibraryManagementConnection"]);
+                opt.UseNpgsql(configuration["ConnectionStrings:LibraryManagementPostgresConnection"]);
                 opt.AddInterceptors(new AuditInterceptor());
             });
 
